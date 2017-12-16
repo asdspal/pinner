@@ -68,8 +68,8 @@ app.get("/createdManifest", ManifestCreatorEnd.getRequestHandler());
 
 // Create Teams connector for the bot
 let connector = new teams.TeamsChatConnector({
-    appId: config.get("bot.botId"),
-    appPassword: config.get("bot.botPassword"),
+	appId: '2d998bd5-94b4-495a-90d9-bddab89929b7',
+    appPassword: 'nwcnN33[@$:slhYEVLKI403'
 });
 
 // Create storage for the bot
@@ -87,6 +87,9 @@ let botSettings = {
 
 let bot = new Bot(connector, botSettings);
 
+bot.on('message', function(app){
+	app.send('you said %s', session.message.text)
+});
 // Configure bot routes
 app.post("/api/messages", connector.listen());
 app.get("/api/VSTSOauthCallback", VSTSTokenOAuth2API.setUserAccessToken(bot));
